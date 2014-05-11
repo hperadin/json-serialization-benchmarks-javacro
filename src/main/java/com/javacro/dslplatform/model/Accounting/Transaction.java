@@ -5,7 +5,7 @@ public final class Transaction implements java.io.Serializable {
             final double inflow,
             final double outflow,
             final String description,
-            final org.joda.time.DateTime paymentOn) {
+            final String paymentOn) {
         setInflow(inflow);
         setOutflow(outflow);
         setDescription(description);
@@ -16,7 +16,7 @@ public final class Transaction implements java.io.Serializable {
         this.inflow = 0.0;
         this.outflow = 0.0;
         this.description = "";
-        this.paymentOn = org.joda.time.DateTime.now();
+        this.paymentOn = "";
     }
 
     @Override
@@ -104,15 +104,15 @@ public final class Transaction implements java.io.Serializable {
         return this;
     }
 
-    private org.joda.time.DateTime paymentOn;
+    private String paymentOn;
 
     @com.fasterxml.jackson.annotation.JsonProperty("paymentOn")
     @com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY)
-    public org.joda.time.DateTime getPaymentOn() {
+    public String getPaymentOn() {
         return paymentOn;
     }
 
-    public Transaction setPaymentOn(final org.joda.time.DateTime value) {
+    public Transaction setPaymentOn(final String value) {
         if (value == null)
             throw new IllegalArgumentException(
                     "Property \"paymentOn\" cannot be null!");

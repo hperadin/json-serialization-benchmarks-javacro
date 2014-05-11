@@ -243,6 +243,6 @@ public class JsonDeserializationBenchmarks {
 	    	AccountingProtobuf.Customer customer_protobuf = AccountingProtobuf
 				.Customer.parseFrom(customerProtobufSource_byteArray);
     	
-    	Customer customer_dsl = Util.toDsl(customer_protobuf);
+//    	Customer customer_dsl = Util.toDsl(customer_protobuf);
     }   
 }

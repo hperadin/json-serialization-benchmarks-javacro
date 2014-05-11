@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import com.javacro.dslplatform.model.Accounting.Account;
 import com.javacro.dslplatform.model.Accounting.Customer;
 import com.javacro.dslplatform.model.Accounting.Profile;
@@ -216,10 +214,10 @@ public class TestCases {
     public static List<Transaction> getTransactionStubs() {
         return Arrays.asList(new Transaction[] { 
         		new Transaction(),
-                new Transaction(1, 0, "", DateTime.now()), 
-                new Transaction(1, 1, "abcde", DateTime.now()),
-                new Transaction(0, 1, "abcde", DateTime.now()), 
-                new Transaction(0, 0, "ABCDE", DateTime.now()), });
+                new Transaction(1, 0, "", "01-01-01T02:02"), 
+                new Transaction(1, 1, "abcde", "01-01-01T02:02"),
+                new Transaction(0, 1, "abcde", "01-01-01T02:02"), 
+                new Transaction(0, 0, "ABCDE", "01-01-01T02:02"), });
     }
 
     public static List<Account> getBigAssAccountStubs() {
@@ -281,7 +279,7 @@ public class TestCases {
         
         List<Transaction> ts = new ArrayList<Transaction>();
         for(int i = 0 ; i < 50 ; i ++){
-        	ts.add(new Transaction(1,1,"Transaction description",DateTime.now()));
+        	ts.add(new Transaction(1,1,"Transaction description",""));
         }
         
         a.getTransactions().addAll(ts);        
@@ -302,7 +300,7 @@ public class TestCases {
         
         List<Transaction> ts = new ArrayList<Transaction>();
         for(int i = 0 ; i < 10000 ; i ++){
-        	ts.add(new Transaction(1,1,"Transaction description",DateTime.now()));
+        	ts.add(new Transaction(1,1,"Transaction description",""));
         }
         
         a.getTransactions().addAll(ts);        

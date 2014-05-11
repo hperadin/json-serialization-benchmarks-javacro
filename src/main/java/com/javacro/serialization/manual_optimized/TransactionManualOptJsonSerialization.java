@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
-import org.joda.time.DateTime;
-
 import com.javacro.dslplatform.model.Accounting.Transaction;
 import com.javacro.serialization.io.jvm.json.JsonReader;
 import com.javacro.serialization.io.jvm.json.JsonReaderOptimized;
@@ -38,7 +36,7 @@ public abstract class TransactionManualOptJsonSerialization {
         double _inFlow = 0.0;
         double _outFlow = 0.0;
         String _description = "";
-        DateTime _paymentOn = DateTimeConverter.minDate;
+        String _paymentOn = "";
     	if (nextToken == '}') return new Transaction(_inFlow, _outFlow, _description, _paymentOn);
     	int nameHash = ManualJson.fillName(reader, buffer, nextToken);
     	nextToken = ManualJson.getNextToken(reader);
@@ -61,7 +59,7 @@ public abstract class TransactionManualOptJsonSerialization {
 					nextToken = ManualJson.getNextToken(reader);
 					break;
 				case -311362482:
-					_paymentOn = DateTimeConverter.deserialize(reader, buffer, nextToken);
+					_paymentOn = StringConverter.deserialize(reader, buffer, nextToken);
 					nextToken = ManualJson.getNextToken(reader);
 					break;
 				default:
@@ -95,7 +93,7 @@ public abstract class TransactionManualOptJsonSerialization {
     					nextToken = ManualJson.getNextToken(reader);
     					break;
     				case -311362482:
-    					_paymentOn = DateTimeConverter.deserialize(reader, buffer, nextToken);
+    					_paymentOn = StringConverter.deserialize(reader, buffer, nextToken);
     					nextToken = ManualJson.getNextToken(reader);
     					break;
     				default:
@@ -115,7 +113,7 @@ public abstract class TransactionManualOptJsonSerialization {
         double _inFlow = 0.0;
         double _outFlow = 0.0;
         String _description = "";
-        DateTime _paymentOn = DateTimeConverter.minDate;
+        String _paymentOn = "";
     	if (reader.read() == '}') return new Transaction(_inFlow, _outFlow, _description, _paymentOn);
     	int nameHash = reader.fillName();
     	int nextToken = reader.moveToNextToken();
@@ -138,7 +136,7 @@ public abstract class TransactionManualOptJsonSerialization {
 					nextToken = reader.getNextToken();
 					break;
 				case -311362482:
-					_paymentOn = DateTime.parse(reader.readString());
+					_paymentOn = reader.readString();
 					nextToken = reader.getNextToken();
 					break;
 				default:
@@ -173,7 +171,7 @@ public abstract class TransactionManualOptJsonSerialization {
     					nextToken = reader.getNextToken();
     					break;
     				case -311362482:
-    					_paymentOn = DateTime.parse(reader.readString());
+    					_paymentOn = reader.readString();
     					nextToken = reader.getNextToken();
     					break;
     				default:
@@ -193,7 +191,7 @@ public abstract class TransactionManualOptJsonSerialization {
         double _inFlow = 0.0;
         double _outFlow = 0.0;
         String _description = "";
-        DateTime _paymentOn = DateTimeConverter.minDate;
+        String _paymentOn = "";
     	if (reader.last() == '}') return new Transaction(_inFlow, _outFlow, _description, _paymentOn);
     	int nameHash = reader.fillName();
     	int nextToken = reader.getNextToken();
@@ -216,7 +214,7 @@ public abstract class TransactionManualOptJsonSerialization {
 					nextToken = reader.getNextToken();
 					break;
 				case -311362482:
-					_paymentOn = DateTime.parse(reader.readSimpleString());
+					_paymentOn = reader.readString();
 					nextToken = reader.getNextToken();
 					break;
 				default:
@@ -250,7 +248,7 @@ public abstract class TransactionManualOptJsonSerialization {
     					nextToken = reader.getNextToken();
     					break;
     				case -311362482:
-    					_paymentOn = DateTime.parse(reader.readSimpleString());
+    					_paymentOn = reader.readSimpleString();
     					nextToken = reader.getNextToken();
     					break;
     				default:

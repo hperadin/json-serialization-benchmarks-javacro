@@ -3,8 +3,6 @@ package com.javacro.benchmarks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import com.javacro.dslplatform.model.Accounting.Account;
 import com.javacro.dslplatform.model.Accounting.Customer;
 import com.javacro.dslplatform.model.Accounting.Profile;
@@ -47,11 +45,8 @@ public class Util {
     	transaction_dsl.setInflow(transaction_protobuf.getInflow());
     	transaction_dsl.setOutflow(transaction_protobuf.getOutflow());
     	
-    	// Bottleneck
-    	if(transaction_protobuf.getPaymentOn().equals(""))
-    		transaction_dsl.setPaymentOn(DateTime.parse("1-1-1T00:22"));
-    	else
-    		transaction_dsl.setPaymentOn(DateTime.parse(transaction_protobuf.getPaymentOn()));
+    	// Bottleneck    	
+    	transaction_dsl.setPaymentOn(transaction_protobuf.getPaymentOn());
     	    	
     	return transaction_dsl;
     }

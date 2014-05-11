@@ -28,7 +28,7 @@ module Accounting {
    Double     inflow;
    Double     outflow;
    String     description;
-   Timestamp  paymentOn;
+   String     paymentOn;
  }
 
 }

@@ -3,8 +3,6 @@ package com.javacro.benchmarks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-
 import com.javacro.protobuf.model.accounting.AccountingProtobuf;
 import com.javacro.protobuf.model.accounting.AccountingProtobuf.Account;
 import com.javacro.protobuf.model.accounting.AccountingProtobuf.Customer;
@@ -49,9 +47,9 @@ public class TestCasesProtobuf {
 		final Transaction.Builder b = Transaction.newBuilder();
 //		ts.add(b.build());
 		ts.add(b.setInflow(1).build());
-		ts.add(b.setInflow(1).setOutflow(1).setDescription("abcde").build());
-		ts.add(b.setInflow(0).setOutflow(1).setDescription("abcde").build());
-		ts.add(b.setInflow(0).setOutflow(0).setDescription("ABCDE").build());
+		ts.add(b.setInflow(1).setPaymentOn("01-01-01T02:02").setOutflow(1).setDescription("abcde").build());
+		ts.add(b.setInflow(0).setPaymentOn("01-01-01T02:02").setOutflow(1).setDescription("abcde").build());
+		ts.add(b.setInflow(0).setPaymentOn("01-01-01T02:02").setOutflow(0).setDescription("ABCDE").build());
 
 		return ts;
 
@@ -141,7 +139,7 @@ public class TestCasesProtobuf {
 		ab.setCurrency("HRK");
         ab.setIBAN("HR1234567");
 		
-		tb.setDescription("transaction description").setInflow(1).setOutflow(1);
+		tb.setPaymentOn("01-01-01T02:02").setDescription("transaction description").setInflow(1).setOutflow(1);
 		
 		List<Transaction> ts = new ArrayList<AccountingProtobuf.Transaction>();
 		
@@ -164,7 +162,7 @@ public class TestCasesProtobuf {
 		ab.setCurrency("HRK");
         ab.setIBAN("HR1234567");
 		
-		tb.setDescription("transaction description").setInflow(1).setOutflow(1);
+		tb.setPaymentOn("01-01-01T02:02").setDescription("transaction description").setInflow(1).setOutflow(1);
 		
 		List<Transaction> ts = new ArrayList<AccountingProtobuf.Transaction>();
 		

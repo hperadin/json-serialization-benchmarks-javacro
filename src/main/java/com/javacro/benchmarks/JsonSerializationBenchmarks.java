@@ -50,9 +50,8 @@ public class JsonSerializationBenchmarks {
 	private JsonSerialization jsonSerialization;
 	private JacksonAfterburnerSerialization afterburnerSerialization;	
 	
-	private final Customer testCustomerStub = TestCases.getSmallCustomer();
-	private final AccountingProtobuf.Customer 
-		testProtobufCustomerStub=TestCasesProtobuf.getSmallCustomer();		
+	private Customer testCustomerStub;
+	private AccountingProtobuf.Customer	testProtobufCustomerStub;		
 
 	public static void main(final String[] args) {
 
@@ -203,8 +202,10 @@ public class JsonSerializationBenchmarks {
 		this.afterburnerSerialization = new JacksonAfterburnerSerialization(
 				locator);
 		
-		System.out.println("DSL object transactions: " + Util.getTransactionsNum(TestCases.getSmallCustomer()));
-		System.out.println("Protobuf object transactions: " + Util.getTransactionsNum(TestCasesProtobuf.getSmallCustomer()));
+		this.testCustomerStub = TestCases.getBigAssCustomer();
+		this.testProtobufCustomerStub = TestCasesProtobuf.getBigAssCustomer();		
+		System.out.println("DSL object transactions: " + Util.getTransactionsNum(TestCases.getBigAssCustomer()));
+		System.out.println("Protobuf object transactions: " + Util.getTransactionsNum(TestCasesProtobuf.getBigAssCustomer()));
 	}
 
 	@GenerateMicroBenchmark
@@ -244,7 +245,7 @@ public class JsonSerializationBenchmarks {
 
 	@GenerateMicroBenchmark
 	public void timeProtobufferJson() throws IOException {
-		byte[] protobufCustTest = testProtobufCustomerStub.toByteArray();
-		Customer customer_dsl = Util.toDsl(testProtobufCustomerStub);
+		byte[] protobufCustTest = testProtobufCustomerStub.toByteArray();		
+//		Customer customer_dsl = Util.toDsl(testProtobufCustomerStub);
 	}
 }

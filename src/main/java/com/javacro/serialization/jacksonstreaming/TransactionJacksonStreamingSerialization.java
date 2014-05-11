@@ -3,8 +3,6 @@ package com.javacro.serialization.jacksonstreaming;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -28,14 +26,14 @@ public abstract class TransactionJacksonStreamingSerialization {
         return transaction;
     }
     
-    //private static DateTime minDate = DateTime.parse("1-1-1T00:22");
+    //private static String minDate = "1-1-1T00:22";
 
     public static void write(final JsonGenerator jsonGenerator, final Transaction value) throws IOException {
 
         final double inflow = value.getInflow();
         final double outflow = value.getOutflow();
         final String description = value.getDescription();
-        final DateTime paymentOn = value.getPaymentOn();
+        final String paymentOn = value.getPaymentOn();
 
         jsonGenerator.writeStartObject();
 
@@ -50,13 +48,13 @@ public abstract class TransactionJacksonStreamingSerialization {
 
         jsonGenerator.writeEndObject();
     }
-    private static DateTime minDate = DateTime.parse("1-1-1T12:34");
+    private static String minDate = "1-1-1T12:34";
 
     public static Transaction read(final JsonParser jsonParser) throws IOException {
         double _inflow = 0.0;
         double _outflow = 0.0;
         String _description = "";
-        DateTime _paymentOn = minDate;
+        String _paymentOn = minDate;
 
         while (jsonParser.nextToken() != JsonToken.END_OBJECT) {
             final String property = jsonParser.getCurrentName();
@@ -78,7 +76,7 @@ public abstract class TransactionJacksonStreamingSerialization {
             }
             if ("paymentOn".equals(property)) {
                 jsonParser.nextToken();
-                _paymentOn = DateTime.parse(jsonParser.getText());
+                _paymentOn = jsonParser.getText();
                 continue;
             }
         }

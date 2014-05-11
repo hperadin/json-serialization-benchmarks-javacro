@@ -3,8 +3,6 @@ package com.javacro.serialization.manual;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.joda.time.DateTime;
-
 import com.javacro.dslplatform.model.Accounting.Transaction;
 import com.javacro.serialization.io.jvm.json.JsonReader;
 import com.javacro.serialization.io.jvm.json.JsonWriter;
@@ -21,7 +19,7 @@ public abstract class TransactionManualJsonStreaming {
         if (!transaction.getDescription().isEmpty())
             return false;
 
-        if (!transaction.getPaymentOn().equals(DateTime.parse("1-1-1T00:22")))
+        if (!transaction.getPaymentOn().equals("1-1-1T00:22"))
                 return false;
 
         return true;
@@ -51,7 +49,7 @@ public abstract class TransactionManualJsonStreaming {
         final Double _inflow = value.getInflow();
         final Double _outflow = value.getOutflow();
         final String _description = value.getDescription();
-        final DateTime _paymentOn = value.getPaymentOn();
+        final String _paymentOn = value.getPaymentOn();
 
         jsonWriter.writeOpenObject();
 
@@ -76,7 +74,7 @@ public abstract class TransactionManualJsonStreaming {
             needsComma=true;
         }
 
-        if(!_paymentOn.equals(DateTime.parse("1-1-1T00:22"))){
+        if(!_paymentOn.equals("1-1-1T00:22")){
             if (needsComma) jsonWriter.writeComma();
             jsonWriter.writeRaw("\"paymentOn\":");
             jsonWriter.writeString(_paymentOn.toString());
@@ -93,7 +91,7 @@ public abstract class TransactionManualJsonStreaming {
         double _inflow = 0.0;
         double _outflow = 0.0;
         String _description = null;
-        DateTime _paymentOn = null;
+        String _paymentOn = null;
 
         final StringBuilder sb = new StringBuilder();
 
@@ -119,7 +117,7 @@ public abstract class TransactionManualJsonStreaming {
                 continue;
             }
             else if (property.equals("paymentOn")) {
-                _paymentOn = DateTime.parse(jsonReader.readString());
+                _paymentOn = jsonReader.readString();
                 needsComma=true;
                 continue;
             }
@@ -129,6 +127,6 @@ public abstract class TransactionManualJsonStreaming {
                 _inflow
                 , _outflow
                 , _description == null? "" : _description
-                , _paymentOn == null? DateTime.now() : _paymentOn);
+                , _paymentOn);
     }
 }
